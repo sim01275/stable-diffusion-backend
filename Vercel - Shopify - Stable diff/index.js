@@ -7,12 +7,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.json());
 app.use(cors({
-  origin: process.env.SHOP_URL,
-  methods: ['GET', 'POST'],
-  credentials: true
-}));
+    origin: '*', // Changez ceci temporairement pour le test
+    methods: ['GET', 'POST', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'x-shopify-access-token']
+  }));
 
 // Ajoutez cette route au début pour tester
 app.post('/test-post', (req, res) => {
