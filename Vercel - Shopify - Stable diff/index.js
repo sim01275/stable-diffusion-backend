@@ -6,13 +6,23 @@ const axios = require('axios');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors({
-    origin: '*', // Changez ceci temporairement pour le test
-    methods: ['GET', 'POST', 'OPTIONS'],
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'x-shopify-access-token']
-  }));
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Ajoutez ces middlewares avant les routes
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Ajoutez une route de test simple
+app.get('/', (req, res) => {
+  res.send('API is working!');
+});
+
+app.get('/test', (req, res) => {
+  res.json({ message: 'Test route working' });
+});
+
+// ... reste du code ...
 
 // Ajoutez cette route au début pour tester
 app.post('/test-post', (req, res) => {
