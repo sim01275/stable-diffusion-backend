@@ -3,35 +3,25 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 
-const app = express();
+const app = express(); // Supprimez la deuxième déclaration
 const port = process.env.PORT || 3000;
 
-const app = express();
-const port = process.env.PORT || 3000;
+// Middleware
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'x-shopify-access-token']
+}));
 
-// Ajoutez ces middlewares avant les routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Ajoutez une route de test simple
+// Routes de test
 app.get('/', (req, res) => {
   res.send('API is working!');
 });
 
-app.get('/test', (req, res) => {
-  res.json({ message: 'Test route working' });
-});
-
-// ... reste du code ...
-
-// Ajoutez cette route au début pour tester
-app.post('/test-post', (req, res) => {
-    console.log('Test POST reçu');
-    res.json({ 
-      message: 'POST working',
-      body: req.body 
-    });
-  });
+// ... reste de votre code ...
 
 // Middleware de vérification Shopify simplifié
 const verifyShopifyWebhook = async (req, res, next) => {
