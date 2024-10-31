@@ -14,6 +14,14 @@ app.use(cors({
   credentials: true
 }));
 
+// Ajoutez cette route au début pour tester
+app.post('/test-post', (req, res) => {
+    console.log('Test POST reçu');
+    res.json({ 
+      message: 'POST working',
+      body: req.body 
+    });
+  });
 
 // Middleware de vérification Shopify simplifié
 const verifyShopifyWebhook = async (req, res, next) => {
